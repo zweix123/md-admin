@@ -1,1 +1,4 @@
-这是一个用Python实现的MarkDown项目管理工具集, 包管理器使用第三方库`poetry`(1.3.2), 如果您的机器没有这个Python库, 请安装`pip3 install`
+这是一个用Python实现的Markdown项目管理工具集，环境管理使用Python的第三方库poetry
+>我的Python版本是3.11.1，portry库版本是1.3.2
+>+ 如果您的Python版本不能运行`portry install`，可以直接修改poetry的配置文件到您机器的版本
+
