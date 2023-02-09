@@ -1,1 +1,1 @@
-这是一个用Python实现的MarkDown项目管理工具集, 包管理器使用`poetry`(1.3.2), 如果您的机器没有这个Python库, 请安装.
+这是一个用Python实现的MarkDown项目管理工具集, 包管理器使用第三方库`poetry`(1.3.2), 如果您的机器没有这个Python库, 请安装`pip3 install`

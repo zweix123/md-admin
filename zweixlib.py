@@ -1,6 +1,8 @@
 import os
 import chardet
 
+from settings import *
+
 
 def get_file_code(file_path):  # 检测文件编码格式, 效率较低
     res = str()
@@ -28,3 +30,9 @@ def get_filenames(top, suffix, contrabands=[]):
     res = filter(lambda filename: check(filename), res)
 
     return list(res)
+
+
+def check():
+    if os.path.exists(DIRPATH) is False:
+        print("目录不存在")
+        exit()

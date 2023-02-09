@@ -25,15 +25,13 @@ def count_content(content):
 
 
 if __name__ == "__main__":
-    dir_name = sys.argv[1]
-    if os.path.exists(dir_name) is False:
-        print("目录不存在")
-        exit()
-    filenames = get_filenames(dir_name, "md")
+    check()
+    filenames = get_filenames(DIRPATH, "md")
 
     count_en, count_zh, count_dg, count_pu = 0, 0, 0, 0
 
     for file in tqdm(filenames):
+        # print(file)
         with open(file, encoding=get_file_code(file)) as f:
             for line in f:
                 t = count_content(line)
