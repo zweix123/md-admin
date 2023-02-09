@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "md-admin"
+version = "0.1.0"
+description = "This is a markdown project ( blog or note ) management tools implemented with python"
+authors = ["zweix <1979803044@qq.com>"]
+readme = "README.md"
+packages = [{include = "md_admin"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
