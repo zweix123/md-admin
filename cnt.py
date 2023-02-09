@@ -42,4 +42,4 @@ if __name__ == "__main__":
     print("中文: ", f'{int(count_zh):,d}')
     print("数字: ", f'{int(count_dg):,d}')
     print("标点: ", f'{int(count_pu):,d}')
-    print("汇总", f'{int(count_zh + count_en // 6 + count_dg // 32):,d}')
+    print("汇总: ", f'{int(count_zh + count_en // 6 + count_dg // 32):,d}')
