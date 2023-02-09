@@ -1,3 +1,4 @@
+import os
 import sys
 import string
 from tqdm import tqdm
@@ -25,6 +26,9 @@ def count_content(content):
 
 if __name__ == "__main__":
     dir_name = sys.argv[1]
+    if os.path.exists(dir_name) is False:
+        print("目录不存在")
+        exit()
     filenames = get_filenames(dir_name, "md")
 
     count_en, count_zh, count_dg, count_pu = 0, 0, 0, 0
