@@ -1,12 +1,16 @@
 import os
 
-DIRPATH = "/home/netease/Docments/tar"  # 处理的Markdown项目文件绝对路径
-DIRNAME = DIRPATH.split(os.sep)[-1]     # 解析出项目所在的目录的目录名
-
+DIRPATH = "/home/netease/Docments/CS-notes"  # 处理的Markdown项目文件绝对路径
 URLP = "https://cdn.jsdelivr.net/gh/zweix123/CS-notes@master/source"  # 图床的URL前缀
+MODE = "note"
+
+######################################################################################
+
+DIRNAME = DIRPATH.split(os.sep)[-1]     # 解析出项目所在的目录的目录名
 if URLP[-1] != '/':
     URLP += '/'
-MODE = "note"
+
+######################################################################################
 
 def check_cnt():
     if DIRPATH is None or DIRPATH == "":
@@ -28,7 +32,7 @@ def check_perl():
         return False
     return True
 
-def show():
+def show_config():
     print(DIRPATH)
     print(DIRNAME)
     print(URLP)
