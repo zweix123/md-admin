@@ -4,8 +4,6 @@ import re
 from tqdm import tqdm
 from zweixlib import *
 
-MODE = str()
-
 
 def add_escape_for_keyword(name):  # 有些关键字可以出现在路径中但是是正则表达式的关键字, 在其前加上反斜杠'\'
     res = str()
@@ -13,16 +11,15 @@ def add_escape_for_keyword(name):  # 有些关键字可以出现在路径中但�
         if c == '+' or c == '(' or c == ')' or c == '&':
             res += "\\"
         res += c
+    
     return res
 
 
 def process(filepath):
-    # print(filepath)
-
     _, filename = os.path.split(filepath)  # 获得文件名
 
     _, midpath, _ = re.findall(
-        '(?<=({}))(.*?)(?=({}))'.format(add_escape_for_keyword(PROJECT),
+        '(?<=({}))(.*?)(?=({}))'.format(add_escape_for_keyword(DIRNAME),
                                         add_escape_for_keyword(filename)),
         filepath)[0]  # 获得从项目到文件之间的路径
 
@@ -38,6 +35,8 @@ def process(filepath):
             midpath = str()
     elif MODE == "blog":
         midpath = os.path.basename(filename).split('.')[0] + "/"
+    elif MODE == "OSS":
+        midpath = "/"
 
     context = str()
 
@@ -46,11 +45,11 @@ def process(filepath):
 
     def modify(match):
         tar = match.group()
-        # print("修改前", tar)
+        
         pre, mid, suf = str(), str(), str()  # 链接图片的代码, pre和suf是其他部分, mid是路径部分
         if tar[-1] == ")":
             pre = tar[:tar.index("(") + 1]
-            mid = tar[tar.index("(") + 1:tar.index(")")]
+            mid = tar[tar.index("(") + 1:-1]
             suf = tar[-1]
         else:
             pre = tar[:tar.index('"') + 1]
@@ -59,9 +58,9 @@ def process(filepath):
             suf = tar[tar.index('"'):]
 
         _, photoname = os.path.split(mid)
-        res = pre + (URL_PRE + midpath + photoname) + suf
+        res = pre + (URLP + midpath + photoname) + suf
 
-        # print("修改后", res)
+        # print("修改后", res, photoname)
         return res
 
     patten = r"!\[.*?\]\((.*?)\)|<img.*?src=[\'\"](.*?)[\'\"].*?>"
@@ -74,12 +73,8 @@ def process(filepath):
 
 
 if __name__ == "__main__":
-    MODE = sys.argv[1]
-    if MODE != "note" and MODE != "blog":
-        print("mode is wrong!")
-
-    if URL_PRE[-1] != '/':
-        URL_PRE += '/'
+    if check_perl() is False:
+        exit()
 
     filenames = get_filenames(DIRPATH, "md")
 
