@@ -65,6 +65,6 @@ def table():
     files = get_files_under_folder(DIRPATH, "md")
     files = [r"C:\Users\zweix\Documents\CS-notes\README.md"]
     for i, file in enumerate(files):
-        # clear(file)
+        clear(file)
         # print(file)
         create(file)
