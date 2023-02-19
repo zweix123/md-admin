@@ -1,6 +1,6 @@
-import cli.cnt as cnt
-import cli.perl as perl
-import cli.table as table
+import src.command.cnt as cnt
+import src.command.perl as perl
+import src.command.table as table
 
 
 def cli(cmmand):
