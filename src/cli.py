@@ -12,4 +12,3 @@ def cli(cmmand):
         table.table()
     else:
         raise Exception("error cmmand")
-    pass

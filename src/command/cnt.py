@@ -1,6 +1,6 @@
 import string
 from tqdm import tqdm
-from src.zutil import *
+from src.util import *
 from settings import *
 
 

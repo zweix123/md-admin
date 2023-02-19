@@ -1,5 +1,6 @@
 import re
-from src.zutil import *
+from tqdm import tqdm
+from src.util import *
 from settings import *
 
 
@@ -31,14 +32,10 @@ def get_menu(filename):
     for i in range(len(headers)):
         headers[i][0] -= minn - 1
 
-    # headers_ = []
-    # for first, second in headers:
-    #     headers_.append((first - minn + 1, second))
-
     content = ""
     for level, text in headers:
-        text_ = text.replace(" ", "-")
-        row = "    " * (level - 1) + "-   [" + text + "](#" + text_ + ")\n"
+        text_converted = text.replace(" ", "-")
+        row = "    " * (level - 1) + "-   [" + text + "](#" + text_converted + ")\n"
 
         content += row
 
@@ -47,24 +44,19 @@ def get_menu(filename):
 
 def create(filepath):
     content = read(filepath)
-    t = content
-    pattern = "[TOC]\n"
-    content_table = get_menu(filepath)
-    table_content = "<!-- toc.first -->\n{}\n<!-- toc.second -->\n".format(
-        content_table
-    )
-    # content = re.sub(pattern, re.escape(table_content), content)
-    content = content.replace(pattern, table_content)
-    # print(pattern in content)
-    # print(t == content)
+    table = "<!-- toc.first -->\n{}<!-- toc.second -->\n".format(get_menu(filepath))
+    table = table.replace("\\s", "\\\s")  # 特判如果标题中出现`\s`
+    content = re.sub(r"^\[TOC\]\n", table, content, flags=re.MULTILINE)
+
     write(filepath, content)
-    pass
+
+
+def process(filepath):
+    clear(filepath)
+    create(filepath)
 
 
 def table():
     files = get_files_under_folder(DIRPATH, "md")
-    files = [r"C:\Users\zweix\Documents\CS-notes\README.md"]
-    for i, file in enumerate(files):
-        clear(file)
-        # print(file)
-        create(file)
+    for file in tqdm(files):
+        process(file)

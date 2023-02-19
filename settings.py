@@ -1,8 +1,8 @@
-# 请按注释填写下列配置
+# 按注释填写配置
 
-DIRPATH = r"C:\Users\zweix\Documents\CS-notes"  # 处理的Markdown项目文件绝对路径
-URLP = "https://cdn.jsdelivr.net/gh/zweix123/CS-notes@master/source"  # 图床的URL前缀
-MODE = "note"  # node, blog, OSS
+DIRPATH = r"C:\Users\zweix\Documents\CS-notes"  # 程序要处理的Markdown项目根目录的绝对路径
+URLP = "https://cdn.jsdelivr.net/gh/zweix123/CS-notes@master/source"  # 项目使用图床的URL前缀
+MODE = "note"  # 模式有"node"、"blog"和"OSS", 具体解释见README
 
 #
 #
@@ -53,6 +53,9 @@ def check_perl():
         print("请查看图床路径前缀是否填写或填写是否正确")
         return False
     return True
+
+def check():
+    return check_cnt() and check_perl()
 
 
 def show_config():

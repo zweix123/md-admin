@@ -1,37 +1,21 @@
-import os
-import sys
-import re
+import os, re
 from tqdm import tqdm
-from src.zutil import *
+from src.util import *
 from settings import *
-
-
-def add_escape_for_keyword(name):  # 有些关键字可以出现在路径中但是是正则表达式的关键字, 在其前加上反斜杠'\'
-    res = str()
-    for c in name:
-        if c == "+" or c == "(" or c == ")" or c == "&":
-            res += "\\"
-        res += c
-
-    return res
 
 
 def process(filepath):
     _, filename = os.path.split(filepath)  # 获得文件名
 
+    # 使用正则表达式获得项目名到文件名之间的路径
     _, midpath, _ = re.findall(
-        "(?<=({}))(.*?)(?=({}))".format(
-            add_escape_for_keyword(DIRNAME), add_escape_for_keyword(filename)
-        ),
+        "(?<=({}))(.*?)(?=({}))".format(re.escape(DIRNAME), re.escape(filename)),
         filepath,
-    )[
-        0
-    ]  # 获得从项目到文件之间的路径
+    )[0]
 
     # 将路径转换成对应模式的中间路径
     if MODE == "note":
         t_list = midpath.split(os.sep)
-
         while "" in t_list:
             t_list.remove("")
         if len(t_list) != 0:
@@ -43,10 +27,7 @@ def process(filepath):
     elif MODE == "OSS":
         midpath = "/"
 
-    context = str()
-
-    with open(filepath, "r", encoding=get_file_code(filepath)) as f:
-        context = f.read()
+    context = read(filepath)
 
     def modify(match):
         tar = match.group()
@@ -65,23 +46,17 @@ def process(filepath):
         _, photoname = os.path.split(mid)
         res = pre + (URLP + midpath + photoname) + suf
 
-        # print("修改后", res, photoname)
+        # print("modified: ", res, photoname)
         return res
 
-    patten = r"!\[.*?\]\((.*?)\)|<img.*?src=[\'\"](.*?)[\'\"].*?>"
     # 匹配所有图片链接并修改
+    patten = r"!\[.*?\]\((.*?)\)|<img.*?src=[\'\"](.*?)[\'\"].*?>"
     context = re.sub(patten, modify, context)
 
-    # 写回
-    with open(filepath, "w", encoding=get_file_code(filepath)) as f:
-        f.write(context)
+    write(filepath, context)  # 写回
 
 
 def perl():
-    if check_perl() is False:
-        exit()
-
     filenames = get_files_under_folder(DIRPATH, "md")
-
     for filename in tqdm(filenames):
         process(filename)
