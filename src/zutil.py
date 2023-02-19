@@ -18,3 +18,19 @@ def get_file_code(filepath):
     with open(filepath, "rb") as f:
         res = chardet.detect(f.read())["encoding"]
     return res
+
+
+def read(filepath):  # 读取文本文件内容
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding=get_file_code(filepath)) as f:
+            content = f.read()
+            return content
+    else:
+        print("now in {}".format(os.getcwd()))
+        print("the path {} is not exists".format(filepath))
+        exit(-1)
+
+
+def write(filepath, data):  # 向文件(覆)写入内容(这里保证file一定是创建好并被正确使用过的)
+    with open(filepath, "w", encoding=get_file_code(filepath)) as f:
+        f.write(data)
