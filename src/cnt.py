@@ -1,8 +1,7 @@
-import os
-import sys
 import string
 from tqdm import tqdm
 from src.zutil import *
+from settings import *
 
 
 def count_content(content):
@@ -24,11 +23,11 @@ def count_content(content):
     return cnt_en, cnt_zh, cnt_dg, cnt_pu
 
 
-if __name__ == "__main__":
+def cnt():
     if check_cnt() is False:
         exit()
 
-    filenames = get_filenames(DIRPATH, "md")
+    filenames = get_files_under_folder(DIRPATH, "md")
 
     count_en, count_zh, count_dg, count_pu = 0, 0, 0, 0
 
@@ -41,8 +40,8 @@ if __name__ == "__main__":
                 count_dg += t[2]
                 count_pu += t[3]
 
-    print("英文: ", f'{int(count_en):,d}')
-    print("中文: ", f'{int(count_zh):,d}')
-    print("数字: ", f'{int(count_dg):,d}')
-    print("标点: ", f'{int(count_pu):,d}')
-    print("汇总: ", f'{int(count_zh + count_en // 6 + count_dg // 32):,d}')
+    print("英文: ", f"{int(count_en):,d}")
+    print("中文: ", f"{int(count_zh):,d}")
+    print("数字: ", f"{int(count_dg):,d}")
+    print("标点: ", f"{int(count_pu):,d}")
+    print("汇总: ", f"{int(count_zh + count_en // 6 + count_dg // 32):,d}")

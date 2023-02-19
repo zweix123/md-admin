@@ -12,6 +12,9 @@ chardet = "^5.1.0"
 tqdm = "^4.64.1"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

@@ -1,6 +1,6 @@
 import os
 
-DIRPATH = "/home/netease/Docments/CS-notes"  # 处理的Markdown项目文件绝对路径
+DIRPATH = r"C:\Users\zweix\Documents\CS-notes"  # 处理的Markdown项目文件绝对路径
 URLP = "https://cdn.jsdelivr.net/gh/zweix123/CS-notes@master/source"  # 图床的URL前缀
 MODE = "note"
 
