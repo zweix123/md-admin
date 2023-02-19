@@ -1,6 +1,6 @@
-import src.cnt as cnt
-import src.perl as perl
-import src.table as table
+import cli.cnt as cnt
+import cli.perl as perl
+import cli.table as table
 
 def cli(cmmand):
     if cmmand == "cnt":
