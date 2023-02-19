@@ -29,6 +29,12 @@ MODE = ""  # NODE have OSS，node, blog, OSS
 
 ### CMMAND
 
+查看帮助
+```python
+python main.py  # poetry虚拟环境下
+python3 -m poetry run python main.py -h  # 普通环境
+```
+
 + `cnt`：统计字数
 + `perl`：按配置中的路径和模式批量修改图床
 + `table`：批量生成或更新目录, 是同方言`[TOC]\n`(要求必须在每行的开始并且后面有`\n`)
