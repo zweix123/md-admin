@@ -2,7 +2,7 @@ import os
 import sys
 import string
 from tqdm import tqdm
-from zweixlib import *
+from src.zutil import *
 
 
 def count_content(content):

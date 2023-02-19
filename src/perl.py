@@ -2,7 +2,7 @@ import os
 import sys
 import re
 from tqdm import tqdm
-from zweixlib import *
+from src.zutil import *
 
 
 def add_escape_for_keyword(name):  # 有些关键字可以出现在路径中但是是正则表达式的关键字, 在其前加上反斜杠'\'

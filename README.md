@@ -1,23 +1,12 @@
-## 简介和使用
+# md-admin
+一个用Python实现的Markdown项目管理工具
 
-这是一个用Python实现的Markdown项目管理工具集，环境管理使用Python的第三方库poetry
-+ 关于Python版本，我选择的是一个适中的Python版本，如果您的Python版本仍然不够且不想升级，可以直接修改两个poetry配置文件
-+ 关于poetry的使用见我的[教程](https://github.com/zweix123/CS-notes/blob/master/Programing-Language/Python/poetry.md)
++ 本项目使用Python开发，使用poetry作为版本管理, 请确保您的机器上有版本足够的Python已经安装有poetry
+    >关于poetry的使用可参考本人的[教程](https://github.com/zweix123/CS-notes/blob/master/Programing-Language/Python/poetry.md)
 
-## 项目文件结构和功能
-```
-.
-├── cnt.py
-├── perl.py
-├── poetry.lock
-├── pyproject.toml
-├── README.md
-├── settings.py
-└── zweixlib.py
-```
+## Install
 
-### 规模统计
++ 克隆仓库到本地并进入
++ 下载虚拟环境`python3 -m poetry init`
 
-### 图床统一路径切换
-
-### 批量生成刷新目录
+## Use
