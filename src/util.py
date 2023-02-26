@@ -1,5 +1,6 @@
 import os
 import chardet
+from urllib.parse import urlparse
 
 
 def get_files_under_folder(folerpath: str, suffix_name: str = None) -> list[str]:
@@ -34,3 +35,15 @@ def read(filepath):  # 读取文本文件内容
 def write(filepath, data):  # 向文件(覆)写入内容(这里保证file一定是创建好并被正确使用过的)
     with open(filepath, "w", encoding=get_file_code(filepath)) as f:
         f.write(data)
+
+
+# 分辨URL和路径: 判断一个字符串是否为URL
+def is_url(string):
+    result = urlparse(string)
+    return all([result.scheme, result.netloc])
+
+
+# 分辨URL和路径: 判断一个字符串是否为路径
+def is_path(string):
+    result = urlparse(string)
+    return not all([result.scheme, result.netloc])
