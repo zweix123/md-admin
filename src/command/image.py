@@ -1,5 +1,6 @@
 import os, re
 from tqdm import tqdm
+
 from src.util import *
 from settings import *
 
@@ -56,7 +57,7 @@ def process(filepath):
     write(filepath, context)  # 写回
 
 
-def perl():
+def transfer():
     filenames = get_files_under_folder(DIRPATH, "md")
     for filename in tqdm(filenames):
         process(filename)

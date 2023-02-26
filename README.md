@@ -1,8 +1,8 @@
 # md-admin
 一个用Python实现的Markdown项目管理工具
 
-+ 本项目使用Python开发，使用poetry作为版本管理, 请确保您的机器上有版本足够的Python已经安装有poetry
-    >关于poetry的使用可参考本人的[教程](https://github.com/zweix123/CS-notes/blob/master/Programing-Language/Python/poetry.md)
++ 本项目使用Python开发，使用poetry作为版本管理, 请确保您的机器上有版本足够的Python且已经安装有poetry
+    >关于poetry的使用，下面会提供足够的用法，如果想系统学习，可参考本人的[笔记](https://github.com/zweix123/CS-notes/blob/master/Programing-Language/Python/poetry.md)
 
 ## Install
 
