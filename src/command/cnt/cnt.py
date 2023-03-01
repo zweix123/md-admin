@@ -25,9 +25,6 @@ def count_content(content):
 
 
 def cnt():
-    if check_cnt() is False:
-        exit()
-
     filenames = get_files_under_folder(DIRPATH, "md")
 
     count_en, count_zh, count_dg, count_pu = 0, 0, 0, 0

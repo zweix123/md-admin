@@ -71,7 +71,7 @@ def check():
     if len(urlpairs) != 0:
         print("检测所有URL")
         asyncio.run(check_urls(urlpairs))
-    
+
     if len(pathpairs) != 0:
         print("检测所有Path")
         for pathpair in tqdm(pathpairs):
@@ -79,6 +79,6 @@ def check():
                 invalid_paths.append(pathpair)
 
     ans = invalid_urls + invalid_paths
-    
+
     for sam in ans:
         print("文件 {} 中的图床链接 {} 已经失效".format(sam[1], sam[0]))
