@@ -4,42 +4,101 @@
 + 本项目使用Python开发，使用poetry作为版本管理, 请确保您的机器上有版本足够的Python且已经安装有poetry
     >关于poetry的使用，下面会提供足够的用法，如果想系统学习，可参考本人的[笔记](https://github.com/zweix123/CS-notes/blob/master/Programing-Language/Python/poetry.md)
 
+## Contents
+- [md-admin](#md-admin)
+  - [Contents](#contents)
+  - [Install](#install)
+  - [Use](#use)
+    - [Setting](#setting)
+    - [run](#run)
+  - [develop](#develop)
+
 ## Install
 
 + 克隆仓库到本地并进入
-+ 下载虚拟环境`python3 -m poetry init`
++ 下载虚拟环境`python3 -m poetry install`
 
 ## Use
 
 ### Setting
-在使用前请设置配置：文件`settings.py`中, 下面介绍其中的选项
+在使用前请设置配置：文件`settings.py`中的几个常量，含义见注释和注解
 ```python
-DIRPATH = ""  # 处理的Markdown项目文件绝对路径
+DIRPATH = ""  # 处理的Markdown项目目录绝对路径
+DIRNAME = ""  # 处理的Markdown项目目录目录名
 URLP = ""  # 图床的URL前缀
-MODE = ""  # NODE have OSS，node, blog, OSS
+MODE = ""  # NODE(node, blog, OSS)
+"""
+关于常量MODE, 指的是图床下的文件结构, 我们以这样的项目结构来解释不同模式的区别   
+.
+|--os
+|  |--file(file1.jpg, file2.jpg)
+|  `--coroutine(coroutine1.jpg, coroutine.jpg)
+|--DS
+   |---consensus    
+   |     |------PacificA()
+   |     |------Raft(leader.jpg, copyset.jpg)
+   `--storage
+         |-----GFS(gfs.jpg)
+         `-----Ceph(ceph.png)
+1. note: 对于每个文章内的图片, 该文章相对项目根目录的相对路径和图片相对图床的相对路径是一致的.比如(文件后括号内为文件所用图床)    
+.
+|--os
+|  |---file1.jpg
+|  |---file2.jpg
+|  |---coroutine1.jpg
+|  |---coroutine.jpg
+|--DS
+    |---consensus
+    |       |------leader.jpg
+    |       |------copyset.jpg
+    |---storage
+            |---gfs.jpg
+            |---ceph.png
+2. blog: 所有图片以所属的文章为单位平铺在图床下
+.
+|---file
+|    |----file1.jpg
+|    `----file2.jpg
+|---coroutine
+|      |------coroutine1.jpg
+|      `------coroutine2.jpg
+|---PacificA
+|---Raft
+|    |---leader.jpg
+|    `---copyset.jpg
+|---GFS
+|    `---gfs.jpg
+`---Ceph
+     `---ceph.png
+3. OSS: 所有图片都平铺在图床下
+.
+|--file1.jpg
+|--file2.jpg
+|--coroutine1.jpg
+|--coroutine2.jpg
+|--leader.jpg
+|--copyset.jpg
+|--gfs.jpg
+`--ceph.png
+
+example:
+DIRPATH = r"C:\Users\zweix\Documents\CS-notes"
+DIRNAME = "CS-notes"
+URLP = "https://cdn.jsdelivr.net/gh/zweix123/CS-notes@master/source"
+MODE = "note"
+"""
 ```
-+ `DIRPATH`: 即为程序所管理的Markdown项目的根目录的绝对路径
-+ `URLP`: 和图床相关，无论你使用什么作为图床，其中的图片一定有一个共有的前缀，请填写在这里
-+ `MODE`: 和图床相关，有不同的组织图床的方式
-    + `OSS`: 所有的图片都在一个路径下
-    + `blog`: 在图床的根目录以各个文章的文章名创建目录，这个文章的图床在对应名字的路径下
-    + `note`: 一种有组织的文件结构, 每个文件中使用的图片在图床下有和其文章到根目录同样的相对路径前缀
 
-    >后续如果有机会会更仔细的描述这方面
+### run
+>关于poetry管理的虚拟环境的运行有两种方法
+>1. 通过命令`poetry shell`进入虚拟环境，之后就像普通的Python程序一样运行
+>2. 命令添加`python3 -m poetry run`前缀, 之后的部分相当于普通的Python程序一样运行
+>+ 普通的的Python程序运行`Python main.py`
 
-### CMMAND
++ "核心命令":查看帮助:dog:
+    + `python main.py --help`：即可查看命令
+    + `python main.py COMMAND --help`：即可查看对应命令的标记
 
-查看帮助
-```python
-python main.py  # poetry虚拟环境下
-python3 -m poetry run python main.py -h  # 普通环境
-```
+    >本项目的有配置文件，所有不需要参数。
 
-+ `cnt`：统计字数
-+ `perl`：按配置中的路径和模式批量修改图床
-+ `table`：批量生成或更新目录, 是同方言`[TOC]\n`(要求必须在每行的开始并且后面有`\n`)
-    >注意这里的TOC不是类似Typora和VSCode的软件内的功能，而是真的文本替换
-
-### develop
-
-我不清楚项目的文件结构是否合理, 但我个人认为比较有规律，适合扩展，如果有时间，我会仔细描述一下。
+## develop
